@@ -4,10 +4,13 @@
 name: Go
 
 on:
-  push:  
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+  workflow_dispatch:
+    inputs:
+      go-version:
+        description: 'Go version'
+        required: true
+        default: '1.24'
+
 
 jobs:
 
@@ -27,3 +30,7 @@ jobs:
     - name: Test
       run: go test -v ./...
       continue-on-error: true
+
+    - name: Update package
+      run: |
+        ls -al
